@@ -5,11 +5,11 @@ import routes from "./routes";
 import { url } from "./utils";
 
 function App() {
-  console.log(
-    url("home.blog.post", {
-      id: 3,
-    })
-  );
+  // console.log(
+  //   url("home.blog.post", {
+  //     id: 3,
+  //   })
+  // );
 
   return useRoutes(routes);
 }
