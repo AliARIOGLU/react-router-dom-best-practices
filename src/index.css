@@ -64,3 +64,42 @@ nav {
   border-radius: 0.4rem;
   cursor: pointer;
 }
+
+/* .link.active {
+  background-color: red;
+} */
+
+.contact {
+  padding-top: 30px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  width: 200px;
+  background-color: blue;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submit-btn:not(:disabled):hover {
+  background-color: rgb(51, 51, 211);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid gray;
+  padding: 5px 30px;
+}

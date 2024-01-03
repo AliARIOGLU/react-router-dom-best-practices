@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { url } from "../../utils";
 
-//! utils fonksiyonundaki generatePath yardımııyla artık to= diye linklerimi böyle de verebiliyorum.
+//! utils fonksiyonundaki generatePath yardımıyla artık to= diye linklerimi böyle de verebiliyorum.
 
 const Blog404 = () => {
   return (

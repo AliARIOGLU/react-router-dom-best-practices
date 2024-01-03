@@ -2,7 +2,13 @@
 
 import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import {
+  useSearchParams,
+  Link,
+  useLocation,
+  useParams,
+  useNavigate,
+} from "react-router-dom";
 import { blogLinks } from "../../constants";
 import { url } from "../../utils";
 
@@ -10,7 +16,12 @@ const Blog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("search") || "");
 
-  // console.log(searchParams.get("search"));
+  const location = useLocation();
+  const params = useParams();
+  const navigate = useNavigate();
+
+  // console.log("loc", location);
+  // console.log("params", params);
 
   useEffect(() => {
     searchParams.set("search", query);
@@ -37,7 +48,17 @@ const Blog = () => {
         defaultValue={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button onClick={() => setSearchParams({ type: "admin" })}>
+      <button
+        onClick={() => {
+          if (!query.trim()) {
+            return alert("This area cannot be empty!");
+          }
+          setSearchParams({
+            ...Object.fromEntries([...searchParams]),
+            type: "admin",
+          });
+        }}
+      >
         SearchSet
       </button>
       <ul>
@@ -47,6 +68,9 @@ const Blog = () => {
           </Link>
         ))}
       </ul>
+      <button onClick={() => navigate("/blog/categories")}>
+        Blog Categories
+      </button>
     </>
   );
 };

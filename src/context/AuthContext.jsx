@@ -11,6 +11,7 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   useEffect(() => {
+    // delete user?.password;
     localStorage.setItem("user", JSON.stringify(user));
     setAuthenticated(user ? true : false);
   }, [user]);

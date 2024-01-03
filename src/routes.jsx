@@ -17,6 +17,9 @@ import Home from "./pages/home/Home";
 import HomeLayout from "./pages/home/HomeLayout";
 import Profile from "./pages/profile/Profile";
 
+// const user = JSON.parse(localStorage.getItem("user"));
+// console.log(user);
+
 const routes = [
   {
     path: "/",
@@ -37,6 +40,7 @@ const routes = [
         path: "contact",
         name: "contact",
         element: <Contact />,
+        auth: true,
       },
       {
         path: "blog",
@@ -46,11 +50,11 @@ const routes = [
         children: [
           {
             index: true,
-            name: "index",
+            name: "blogIndex",
             element: <Blog />,
           },
           {
-            path: "categories",
+            path: ":categories",
             name: "categories",
             element: <Categories />,
           },

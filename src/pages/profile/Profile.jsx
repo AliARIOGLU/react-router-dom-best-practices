@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { useAuth } from "../../context/AuthContext";
 
 const Profile = () => {
@@ -9,6 +10,9 @@ const Profile = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Profile | {user.username}</title>
+      </Helmet>
       {user && (
         <div>
           <h2>Username: {user.username}</h2>

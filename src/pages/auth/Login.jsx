@@ -1,30 +1,20 @@
 /* eslint-disable */
 
-import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useFormik } from "formik";
+
+const getAlert = (alertMessage) => {
+  return alert(`${alertMessage}!!!`);
+};
 
 const Login = () => {
   const { setUser, authenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const handleLogin = () => {
-  //   setUser({
-  //     id: 1,
-  //     name: "codex",
-  //   });
-
-  //   navigate(location?.state?.returnUrl || "/");
-  // };
-
-  useEffect(() => {
-    if (authenticated) {
-      navigate("/");
-    }
-  }, [navigate, authenticated]);
+  console.log("login");
 
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
@@ -32,6 +22,8 @@ const Login = () => {
       password: "",
     },
     onSubmit: (values) => {
+      if (!values.username.trim()) return getAlert("username cannot be empty");
+      if (!values.password.trim()) return getAlert("password cannot be empty");
       setUser({ ...values, id: Math.floor(Math.random() * 9) });
 
       navigate(location?.state?.returnUrl || "/");

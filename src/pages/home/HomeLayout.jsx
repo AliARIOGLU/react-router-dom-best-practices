@@ -1,27 +1,10 @@
-import { NavLink, Outlet } from "react-router-dom";
-import { navLinks } from "../../constants";
+import { Outlet } from "react-router-dom";
+import Navbar from "./_components/Navbar";
 
 const HomeLayout = () => {
   return (
     <div>
-      <nav>
-        {navLinks.map((link) => (
-          <NavLink
-            style={({ isActive }) => ({
-              backgroundColor: isActive ? "yellow" : "",
-            })}
-            to={link.href}
-            key={link.page}
-          >
-            {({ isActive }) => (
-              <>
-                {link.page}
-                {isActive && "(Active)"}
-              </>
-            )}
-          </NavLink>
-        ))}
-      </nav>
+      <Navbar />
       <Outlet />
     </div>
   );

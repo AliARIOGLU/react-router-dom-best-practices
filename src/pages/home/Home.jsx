@@ -10,7 +10,7 @@ const Home = () => {
         <title>Anasayfa</title>
         <meta name="description" content="anasayfa description" />
       </Helmet>
-      <div>{user ? <p>Welcome {user.name}</p> : <p>Home Page</p>}</div>
+      <div>{user ? <p>Welcome {user.username}</p> : <p>Home Page</p>}</div>
     </>
   );
 };
