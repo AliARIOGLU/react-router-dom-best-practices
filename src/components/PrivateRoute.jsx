@@ -1,22 +1,28 @@
 /* eslint-disable */
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+const PrivateRoute = ({ children, allowedRoles }) => {
+  const { authenticated, user } = useAuth();
   const location = useLocation();
 
-  if (!user) {
-    return (
-      <Navigate
-        to="/auth/login"
-        replace={true}
-        state={{ returnUrl: location.pathname }}
-      />
-    );
-  }
+  console.log(user);
 
-  return children;
+  return user?.roles?.find((role) => allowedRoles?.includes(role)) ? (
+    children
+  ) : user ? (
+    <Navigate
+      to="/unauthorized"
+      state={{ returnUrl: location.pathname }}
+      replace
+    />
+  ) : (
+    <Navigate
+      to="/auth/login"
+      state={{ returnUrl: location.pathname }}
+      replace
+    />
+  );
 };
 
 export default PrivateRoute;

@@ -14,19 +14,13 @@ const AuthLayout = () => {
   //   }
   // }, [authenticated, navigate]);
 
-  const content = authenticated ? (
+  return authenticated ? (
+    <Navigate to="/" />
+  ) : (
     <>
       <h2>Auth Layout</h2>
       <Outlet />
     </>
-  ) : (
-    <Navigate to="/" />
-  );
-
-  return (
-    <div>
-      <>{content}</>
-    </div>
   );
 };
 

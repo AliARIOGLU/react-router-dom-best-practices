@@ -19,6 +19,14 @@ export const navLinks = [
     page: "Profile",
     href: "/profile",
   },
+  {
+    page: "Admin Panel",
+    href: "/admin",
+  },
+  {
+    page: "Editor Panel",
+    href: "/editor",
+  },
 ];
 
 export const blogLinks = [

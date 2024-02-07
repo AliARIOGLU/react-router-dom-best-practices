@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 // PAGES
 import NotFound from "./pages/404/NotFound";
 import About from "./pages/about/About";
+import Admin from "./pages/admin/Admin";
 import AuthLayout from "./pages/auth/AuthLayout";
 import Login from "./pages/auth/Login";
 import Blog from "./pages/blog/Blog";
@@ -13,12 +14,20 @@ import BlogDetail from "./pages/blog/BlogDetail";
 import BlogLayout from "./pages/blog/BlogLayout";
 import Categories from "./pages/blog/Categories";
 import Contact from "./pages/contact/Contact";
+import Editor from "./pages/editor/Editor";
 import Home from "./pages/home/Home";
 import HomeLayout from "./pages/home/HomeLayout";
 import Profile from "./pages/profile/Profile";
+import Unauthorized from "./pages/unauthorized/Unauthorized";
 
 // const user = JSON.parse(localStorage.getItem("user"));
 // console.log(user);
+
+export const ROLES = {
+  User: 100,
+  Admin: 155,
+  Editor: 200,
+};
 
 const routes = [
   {
@@ -41,12 +50,14 @@ const routes = [
         name: "contact",
         element: <Contact />,
         auth: true,
+        role: ROLES.User,
       },
       {
         path: "blog",
         name: "blog",
         element: <BlogLayout />,
         auth: true,
+        role: ROLES.User,
         children: [
           {
             index: true,
@@ -75,6 +86,21 @@ const routes = [
         name: "profile",
         element: <Profile />,
         auth: true,
+        role: ROLES.User,
+      },
+      {
+        path: "/admin",
+        name: "admin",
+        element: <Admin />,
+        auth: true,
+        role: ROLES.Admin,
+      },
+      {
+        path: "/editor",
+        name: "editor",
+        element: <Editor />,
+        auth: true,
+        role: ROLES.Editor,
       },
     ],
   },
@@ -91,6 +117,11 @@ const routes = [
     ],
   },
   {
+    path: "/unauthorized",
+    name: "unauthorized",
+    element: <Unauthorized />,
+  },
+  {
     path: "*",
     name: "notFound",
     element: <NotFound />,
@@ -100,7 +131,9 @@ const routes = [
 const authMap = (routes) => {
   return routes.map((route) => {
     if (route?.auth) {
-      route.element = <PrivateRoute>{route.element}</PrivateRoute>;
+      route.element = (
+        <PrivateRoute allowedRoles={[route.role]}>{route.element}</PrivateRoute>
+      );
     }
 
     if (route?.children) {

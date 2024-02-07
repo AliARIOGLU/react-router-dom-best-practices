@@ -10,6 +10,8 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || false
   );
 
+  console.log(user);
+
   useEffect(() => {
     // delete user?.password;
     localStorage.setItem("user", JSON.stringify(user));
